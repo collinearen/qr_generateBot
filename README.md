@@ -1,1 +1,3 @@
-«`{python}<пробел>{pip install -r requirements.txt}«`
+'''python
+piip isnstall -r requirements.txt
+'''
