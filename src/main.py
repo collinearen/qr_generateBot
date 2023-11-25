@@ -19,7 +19,11 @@ dp = Dispatcher()
 
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    photo = FSInputFile(r"/Users/ya/Desktop/all/projects/other/telegram-bot/media/img/P1380658.jpg")
+    '''
+    :param message: передаем наше дефолтное фото приветствия, с описанием реализации бота
+    :return:
+    '''
+    photo = FSInputFile(fr"{settings.PATH_DEFAULT_PHOTO}")
     await bot.send_photo(message.chat.id, photo,
                          caption=f"Привет, это бот по генерации QR-кодов, "
                                  "напиши мне что-либо, а я сгенерирую на твое сообщение QR.\n"
@@ -28,6 +32,10 @@ async def cmd_start(message: types.Message):
 
 @contextmanager
 def take_photo(photo):
+    '''
+    Так как не нужно в дальнейшем хранить QR-коды,
+    можно создать контекст менеджер, и при закрытии его через блок finally всегда удалять фотографию по пути photo.path
+    '''
     try:
         yield photo
     finally:
